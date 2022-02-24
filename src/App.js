@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import useBooksSearch from './useBooksSearch';
 
 const App = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -29,7 +30,17 @@ const Search = ({updateSearchInput}) => {
 }
 
 const BookCards = ({value}) => {
-  const { booksData } = useBooksSearch(value)
+  const { booksData, isLoading } = useBooksSearch(value)
+
+  const cards = useMemo(() => booksData?.map(book => console.log("here",book)) ,[booksData])
+
+  return (
+    <></>
+  )
+}
+
+const Card = ({}) => {
+  
 }
 
 export default App;
