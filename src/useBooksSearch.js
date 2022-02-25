@@ -14,10 +14,11 @@ const useBooksSearch = (value) => {
             fetch(`https://www.googleapis.com/books/v1/volumes?q=${value}`, {signal})
             .then(res => res.json())
             .then(res => {
-                console.log(res);
                 setBookData(res?.items?.slice(0,MaxDataLength))
                 setIsLoading(false)
-            });
+            })
+            .catch(() => setBookData([]))
+            .finally(() => setIsLoading(false));
         };
         return () => {
             controller.abort()

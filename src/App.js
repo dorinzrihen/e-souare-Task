@@ -38,9 +38,14 @@ const BookCards = ({value}) => {
 
   const isEmpty = !isLoading && !booksData?.length && value;
   const noBookMsg = 'No results found';
+  const noImage = 'https://www.finisswim.com/sca-dev-2021-1-0/extensions/SuiteCommerce/Finis_custom_20/20.1.4/img/no_image_available.jpeg'
 
-  console.log(booksData);
-  const cards = useMemo(() => booksData?.map(book => <Card key={book?.volumeInfo?.title} title={book?.volumeInfo?.title} src={book?.volumeInfo?.imageLinks.smallThumbnail} description={book?.volumeInfo?.description}/>) ,[booksData])
+  const cards = useMemo(
+    () => booksData?.map((book, index) => {
+      const { title, imageLinks, description } = book.volumeInfo;
+      const { thumbnail, smallThumbnail } = imageLinks ?? {};
+      return <Card key={`${title}-${index}`} title={title} src={thumbnail || smallThumbnail || noImage} description={description}/>
+  }) ,[booksData])
 
   return (
     <div className='cards-container'>
