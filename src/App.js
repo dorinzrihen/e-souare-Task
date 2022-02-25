@@ -18,15 +18,17 @@ const App = () => {
 const Header = ({updateSearchInput}) => {
   const [inputValue, setInputValue] = useState('');
 
+  const handleSearch = () => updateSearchInput(inputValue);
+
   const handleInputChange = (e) => setInputValue(e.target.value);
 
-  const handleSearch = () => updateSearchInput(inputValue);
+  const onKeyDown = (e) => e.keyCode === 13 && handleSearch();
 
   return (
     <div className='header'>
       <h1>Book search</h1>
       <div className='header-search'>
-        <input placeholder='Search for book name' value={inputValue} onChange={handleInputChange}></input>
+        <input placeholder='Search for book name' value={inputValue} onChange={handleInputChange} onKeyDown={onKeyDown}></input>
         <button onClick={handleSearch}>Search</button>
       </div>
     </div>
