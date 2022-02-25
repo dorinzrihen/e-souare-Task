@@ -58,8 +58,10 @@ const Card = ({title, description, src}) => {
       <div className='card-src'>
         <img src={src} alt='book img'/>
       </div>
-      <h3 dir="auto">{title}</h3>
-      <p dir="auto">{description}</p>
+      <div className='content'>
+        <h4 dir="auto">{title}</h4>
+        <p dir="auto">{description}</p>
+      </div>
     </div>
   );
 };
