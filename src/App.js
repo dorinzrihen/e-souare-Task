@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import useBooksSearch from './useBooksSearch';
+import './App.css';
 
 const App = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -8,13 +9,13 @@ const App = () => {
 
   return (
     <div className="App">
-      <Search updateSearchInput={updateSearchInput} />
+      <Header updateSearchInput={updateSearchInput} />
       <BookCards value={searchInput} />
     </div>
   );
 }
 
-const Search = ({updateSearchInput}) => {
+const Header = ({updateSearchInput}) => {
   const [inputValue, setInputValue] = useState('');
 
   const handleInputChange = (e) => setInputValue(e.target.value);
@@ -22,25 +23,45 @@ const Search = ({updateSearchInput}) => {
   const handleSearch = () => updateSearchInput(inputValue);
 
   return (
-    <>
-      <input value={inputValue} onChange={handleInputChange}></input>
-      <button onClick={handleSearch}>Search</button>
-    </>
-  )
-}
+    <div className='header'>
+      <h1>Book search</h1>
+      <div className='header-search'>
+        <input placeholder='Search for book name' value={inputValue} onChange={handleInputChange}></input>
+        <button onClick={handleSearch}>Search</button>
+      </div>
+    </div>
+  );
+};
 
 const BookCards = ({value}) => {
-  const { booksData, isLoading } = useBooksSearch(value)
+  const { booksData, isLoading } = useBooksSearch(value);
 
-  const cards = useMemo(() => booksData?.map(book => console.log("here",book)) ,[booksData])
+  const isEmpty = !isLoading && !booksData?.length && value;
+  const noBookMsg = 'No results found';
+
+  console.log(booksData);
+  const cards = useMemo(() => booksData?.map(book => <Card key={book?.volumeInfo?.title} title={book?.volumeInfo?.title} src={book?.volumeInfo?.imageLinks.smallThumbnail} description={book?.volumeInfo?.description}/>) ,[booksData])
 
   return (
-    <></>
-  )
-}
+    <div className='cards-container'>
+      {isLoading 
+        ? <div className='loader'></div> 
+        : isEmpty ? <p>{noBookMsg}</p> : cards
+      }
+    </div>
+  );
+};
 
-const Card = ({}) => {
-  
-}
+const Card = ({title, description, src}) => {
+  return (
+    <div className='card'>
+      <div className='card-src'>
+        <img src={src} alt='book img'/>
+      </div>
+      <h3 dir="auto">{title}</h3>
+      <p dir="auto">{description}</p>
+    </div>
+  );
+};
 
 export default App;

@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@100;500&family=Rubik:wght@300;500&display=swap');
+
+:root {
+    --grey: #EDEAE5;
+    --yellow: #FCE181;
+    --light-yellow: #FEF9C7;
+    --light-green: #9fedd7;
+    --green: #026670;
+}
+
+html {
+    font-family: 'Rubik', 'Roboto Serif', sans-serif;
+    background-color: var(--grey);
+}
+
+p {
+    font-size: 11px;
+    margin: 0;
+}
+
+.header {
+    position: relative;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to bottom right, var(--green), var(--light-green));
+    color: var(--light-yellow);
+    border-radius: 10px;
+}
+
+.header-search {
+    height: 30px;
+    background-color: #fff;
+    position: absolute;
+    bottom: -15px;
+    box-shadow: 0px 2px 8px var(--light-green);
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+}
+
+.header-search input {
+    border: none;
+}
+
+.header-search button {
+    border: none;
+    border-radius: 5px;
+    background-color: var(--green);
+    padding: 3px 10px;
+    color: white;
+    font-size: 10px;
+
+}
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.card {
+    width: 250px;
+}
+
+.card-src {
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-src img {
+    max-width: auto;
+    max-height: 100%;
+}
+
+.loader {
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 2s linear infinite;
+}
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
