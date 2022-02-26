@@ -86,8 +86,13 @@ p {
     overflow-y: auto;
 }
 
-.content h4 {
+h4 {
     color: var(--green);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .content::-webkit-scrollbar {
